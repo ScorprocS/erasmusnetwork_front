@@ -8,6 +8,6 @@ public class NavigationController {
 
 	@GetMapping("/message")
 	public String getMessages() {
-		return "message/message";
+		return "message/index";
 	} 
 }
