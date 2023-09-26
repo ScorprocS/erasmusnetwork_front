@@ -1,6 +1,7 @@
 package fr.mns.jee.erasmusnetwork.annonce.controller;
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/collocation")
+@PreAuthorize("isAuthenticated()")
 public class CollocationController {
 
 
