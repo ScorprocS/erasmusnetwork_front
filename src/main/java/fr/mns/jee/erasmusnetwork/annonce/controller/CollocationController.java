@@ -2,10 +2,10 @@ package fr.mns.jee.erasmusnetwork.annonce.controller;
 
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/collocation")
@@ -25,4 +25,25 @@ public class CollocationController {
         return mv;
 
     }
+
+    @GetMapping("/add")
+    public ModelAndView getAddCollocation() {
+
+        ModelAndView mv = new ModelAndView("Annonce/addCollocation");
+        return mv;
+
+    }
+
+    //@PostMapping("/add")
+    //public String createNewHouse(@ModelAttribute("houseForm") House house) {
+//
+    //    house.setId(null);
+    //    house.setNomCollocation();
+    //    house.setDescription();
+    //    house.setNbrPlace();
+    //    repository.save(person);
+//
+    //    return "redirect:/annonce";
+//
+    //}
 }
