@@ -24,9 +24,7 @@ public class UserController {
     public ModelAndView listUsers(){
         ModelAndView mv = new ModelAndView("users/users");
         List<User> usersList = userService.getUsers();
-        for (User user: usersList) {
-            mv.addObject("usersListElement", user);
-        }
+        mv.addObject(usersList);
         return mv;
     }
 }
