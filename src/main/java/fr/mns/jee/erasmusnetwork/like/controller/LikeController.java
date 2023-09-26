@@ -1,5 +1,6 @@
 package fr.mns.jee.erasmusnetwork.like.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,14 @@ public class LikeController {
 		ModelAndView mv = new ModelAndView("like/stats");
 		return mv;
 	}
-	
+
+	@GetMapping("/users")
+	public ModelAndView getStatsUsers() {
+		ModelAndView mv = new ModelAndView("like/users");
+		mv.addObject("usersList",client.getUsersList());
+		return mv;
+	}
+
 	@GetMapping("/comment")
 	public ModelAndView getCommentStats() {
 		ModelAndView mv = new ModelAndView("like/commentStats");
