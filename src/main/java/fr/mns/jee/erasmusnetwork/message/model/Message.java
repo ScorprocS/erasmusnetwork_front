@@ -22,6 +22,8 @@ public class Message implements Serializable {
 
     private Long senderId;
 
+    private String senderName;
+
     private Set<MemberMessageView> views = new HashSet<MemberMessageView>();
 
     public Long getId() {
@@ -85,5 +87,12 @@ public class Message implements Serializable {
             return Optional.empty();
         }
         return Optional.of(senderId);
+    }
+
+    public Optional<String> getSenderName() {
+        if (senderName == null) {
+            return Optional.empty();
+        }
+        return Optional.of(senderName);
     }
 }
