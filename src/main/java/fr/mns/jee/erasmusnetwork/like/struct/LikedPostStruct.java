@@ -27,8 +27,6 @@ public class LikedPostStruct {
 	public void setLike(LikeTypeEnum like) {
 		this.like = like;
 	}
-	public LikedPostStruct() {
-	}
 	public int getId() {
 		return id;
 	}
@@ -42,5 +40,10 @@ public class LikedPostStruct {
 		this.userId = userId;
 		this.like = like;
 	}
+	public LikedPostStruct() {
+		super();
+	}
+	
+	
 	
 }

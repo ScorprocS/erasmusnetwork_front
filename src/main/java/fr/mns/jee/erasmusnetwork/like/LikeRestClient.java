@@ -6,7 +6,8 @@ import fr.mns.jee.erasmusnetwork.like.struct.LikedUserStruct;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(value = "likesClient", url = "http://localhost:8082/api") public interface LikeRestClient {
+@FeignClient(value = "likesClient", url = "http://localhost:8082/api") 
+public interface LikeRestClient {
     @PostMapping(value="/user/like")
     String likeUser(@RequestBody LikedUserStruct likedUserStruct);
 
