@@ -57,9 +57,9 @@
 				<button type="submit">Rechercher</button>
 			</form>
 			<div th:if="${userLikedComments != null && !userLikedComments.isEmpty()}">
-				table class="table table-striped">
+				<table class="table table-striped">
 				<tr>
-					<th scope="col">Commentaire liké</thscope="col">
+					<th scope="col">Commentaire liké</th>
 					<th scope="col">User qui a liké</th>
 					<th scope="col">Type de like</th>
 				</tr>

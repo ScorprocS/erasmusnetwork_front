@@ -53,6 +53,7 @@ public class LikeController {
 	
 	@GetMapping("/commentByUser")
 	public String getCommentsByUserId(Model model, @RequestParam(name = "userId") int userId) {
+		model.addAttribute("comments", client.findAllComments());
 		model.addAttribute("userLikedComments", client.findById(userId));
 		return "like/stats";
 	}
