@@ -1,19 +1,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>comments stats</title>
-    </head>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<title>comments stats</title>
+</head>
+
 <body>
-    
-	<div>
-		<div th:each="comment: ${comments}">
-			<div th:text="${comment.userId}"></div>
-			<div th:text="${comment.commentId}"></div>
-			<div th:text="${comment.like}"></div>
-		</div>
+	<div class="container mt-12">
+		<h1>Liste des commentaires likés</h1>
+		<table class="table table-striped">
+			<tr>
+				<th scope="col">Commentaire liké</thscope="col">
+				<th scope="col">User qui a liké</th>
+				<th scope="col">Type de like</th>
+			</tr>
+			<tr th:each="comment: ${comments}">
+				<td th:utext="${comment.commentId}"></td>
+				<td th:utext="${comment.userId}"></td>
+				<td th:utext="${comment.like}"></td>
+			</tr>
+		</table>
 	</div>
+
+	<div class="container">
+		<h2>Liste des commentaires likés par utilisateur</h2>
+		<form action="#" th:action="@{/commentByUser}" th:object="${userId}" method="post">
+			<input type="number" class="form-control" placeholder="id de l'utilisateur" th:field="*{userId}">
+			<button type="submit" class="btn btn-primary" th:onchange="${getCommentsByUserId}">Charger les commentaires</button>
+		</form>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
 </body>
+
 </html>
