@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,25 +24,6 @@ public class LikeController {
 		return mv;
 	}
 
-	
-	
-	@GetMapping("/users")
-	public ModelAndView getStatsUsers() {
-		ModelAndView mv = new ModelAndView("like/users");
-		mv.addObject("usersList",client.getUsersList());
-		return mv;
-	}
-	
-	@GetMapping("/usersByUser/{userId}")
-	public ModelAndView getUsersByUserId(@PathVariable int userId){
-		ModelAndView mv = new ModelAndView("like/usersByUser");
-		mv.addObject("usersList",client.getUsersById(userId));
-		return mv;
-	}
-	
-	
-	
-
 	@GetMapping("/comment")
 	public String getCommentStats(Model model) {
 		model.addAttribute("comments", client.findAllComments());
@@ -54,7 +33,53 @@ public class LikeController {
 	@GetMapping("/commentByUser")
 	public String getCommentsByUserId(Model model, @RequestParam(name = "userId") int userId) {
 		model.addAttribute("comments", client.findAllComments());
-		model.addAttribute("userLikedComments", client.findById(userId));
+		model.addAttribute("userLikedComments", client.findCommentByUserId(userId));
 		return "like/stats";
 	}
+	
+	@GetMapping("/post")
+	public String getPostStats(Model model) {
+		model.addAttribute("posts", client.findAllPosts());
+		return "like/stats";
+	}
+	
+	@GetMapping("/postByUser")
+	public String getPostsByUserId(Model model, @RequestParam(name = "userId") int userId) {
+		model.addAttribute("posts", client.findAllPosts());
+		model.addAttribute("userLikedPosts", client.findPostByUserId(userId));
+		return "like/stats";
+	}
+	
+	@GetMapping("/user")
+	public String getUserStats(Model model) {
+		model.addAttribute("users", client.findAllUsers());
+		return "like/stats";
+	}
+	
+	@GetMapping("/userByUser")
+	public String getUsersByUserId(Model model, @RequestParam(name = "userId") int userId) {
+		model.addAttribute("users", client.findAllUsers());
+		model.addAttribute("userLikedUsers", client.findUserByUserId(userId));
+		return "like/stats";
+	}
+	
+	
+	
+	
+	
+//	
+//	
+//	@GetMapping("/users")
+//	public ModelAndView getStatsUsers() {
+//		ModelAndView mv = new ModelAndView("like/users");
+//		mv.addObject("usersList",client.getUsersList());
+//		return mv;
+//	}
+//	
+//	@GetMapping("/usersByUser/{userId}")
+//	public ModelAndView getUsersByUserId(@PathVariable int userId){
+//		ModelAndView mv = new ModelAndView("like/usersByUser");
+//		mv.addObject("usersList",client.getUsersById(userId));
+//		return mv;
+//	}
 }
