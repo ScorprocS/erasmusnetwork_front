@@ -25,7 +25,7 @@ public interface UserRestClient {
     @PostMapping(value = "/")
     User createUser(@RequestBody CreateUserRequest request);
 
-    @GetMapping(value = "/getByEmail")
+    @PostMapping(value = "/getByEmail")
     Optional<User> getUserByEmail(@RequestBody GetUserByEmailRequest request);
 
     @PutMapping(value = "/{userId}/enable")

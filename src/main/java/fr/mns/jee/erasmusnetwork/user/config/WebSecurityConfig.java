@@ -18,15 +18,15 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 @EnableMethodSecurity( securedEnabled = true,jsr250Enabled = true,prePostEnabled = true)
 public class WebSecurityConfig {
-		
+
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
-	
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/home","/login").permitAll()
+				.requestMatchers("/", "/home","/login", "/users").permitAll()
 				.requestMatchers("/admin").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			)
@@ -39,8 +39,8 @@ public class WebSecurityConfig {
 			.logout((logout) -> logout.permitAll());
 
 		return http.build();
-		
-		 
+
+
 	}
 //https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/dao-authentication-provider.html
 	 /*	@Bean
@@ -57,7 +57,7 @@ public class WebSecurityConfig {
 
 	        return new InMemoryUserDetailsManager(user, admin);
 	    }
-	 
+
 	*/
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -65,7 +65,7 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http,  PasswordEncoder passwordEncoder) 
+	public AuthenticationManager authenticationManager(HttpSecurity http,  PasswordEncoder passwordEncoder)
 	  throws Exception {
 	    return http.getSharedObject(AuthenticationManagerBuilder.class)
 	      .userDetailsService(userDetailsService)
