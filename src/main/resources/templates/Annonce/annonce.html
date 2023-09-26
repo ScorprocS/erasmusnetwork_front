@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -15,7 +17,8 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="mx-auto" style="width: 800px;">
-    <table class="table table-hover caption-top p-2">
+
+    <table class="table table-hover caption-top">
         <caption>Liste des collocations disponibles</caption>
         <thead>
         <tr>
@@ -33,6 +36,7 @@
         </thead>
     </table>
 
+    <button class="btn btn-primary" style=""><a href="collocation/add" style="color: white; text-decoration: none;">Ajouter collocation</a></button>
 </div>
 
 <!-- Bootstrap JS -->
