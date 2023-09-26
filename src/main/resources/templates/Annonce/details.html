@@ -13,25 +13,26 @@
 
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
-<h1>Erasmus Network</h1>
 
 <form th:action="@{/collocation/book}" method="POST" style="display: flex;
     justify-content: center;
     align-items: center;">
 
     <div class="card" style="width: 500px;">
-        <h5 class="card-header">Nom de la collocation</h5>
+        <h5 class="card-header" th:text="${house.name}"/>
         <div class="card-body">
             <h5 class="card-title">Description</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus est pellentesque elit ullamcorper dignissim cras.</p>
-            <p class="card-text"><small class="text-muted">Il ne reste plus que 2 places !</small></p>
-            <div style="display: flex; justify-content: space-between;">
+<!--            <p class="card-text" th:text="${house.description}"/>-->
+            <p class="card-text"><small class="text-muted" th:text="'Il ne reste plus que ' + ${house.bedAvailable} + ' place' + ${house.bedAvailable > 0 ? 's' : ''}"/></p>
+
+            <div th:if="${house.bedAvailable == 0}">
+                <p>Aucune place disponible.</p>
+            </div>
+
+            <div th:if="${house.bedAvailable > 0}" style="display: flex; justify-content: space-between;">
                 <select class="form-select" aria-label="select example" style="width: fit-content;">
                     <option disabled selected>Réserver le nombre de places :</option>
-                    <option value="1">1 place</option>
-                    <option value="2">2 places</option>
-                    <option value="3">3 places</option>
-                    <option value="4">4 places</option>
+                    <option th:each="bed : ${availableQuantity}" th:text="${bed} + ' place' + ${bed > 1 ? 's' : ''}"></option>
                 </select>
                 <input class="btn btn-secondary" type="submit" value="Valider" />
             </div>
