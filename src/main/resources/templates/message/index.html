@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Chat</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="/css/styles.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+	<div th:fragment="navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="#">Navbar</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item active">
+	        <a class="nav-link" th:href="@{/message}">Chats</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Link</a>
+	      </li>
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Dropdown
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <a class="dropdown-item" href="#">Action</a>
+	          <a class="dropdown-item" href="#">Another action</a>
+	          <div class="dropdown-divider"></div>
+	          <a class="dropdown-item" href="#">Something else here</a>
+	        </div>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link disabled" href="#">Disabled</a>
+	      </li>
+	    </ul>
+	    <form class="form-inline my-2 my-lg-0">
+	      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	    </form>
+	  </div>
+	</nav>
+	</div>
+	<div class="p-5">
+		<h3 class="mb-3">Chats</h3>
+
+		<div class="w-100 bg-light flex align-items-start rounded-3 shadow-sm mt-4" style="min-height: 70vh;">
+			<div class="row align-items-start p-3" style="min-height: 70vh;">
+				<div class="col-3" >
+					<div class="bg-white rounded-3 shadow-sm p-3" style="min-height: 70vh; max-height: 70vh; overflow-y: auto;">
+						<div class="d-flex align-items-center bg-primary rounded p-3 text-white mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+						<div class="d-flex align-items-center p-3 mb-3" style="height: 90px;">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div>
+								<div class="fw-bold">Jean michmich</div>
+								<div class="text-muted">Non je ne suis pas d'accord</div>
+							</div>
+						</div>
+					</div>
+
+					<button class="btn btn-primary w-100 shadow-none border-none mt-3" style="height: 40px;">
+						Add group
+					</button>
+				</div>
+
+				<div class="col-9">
+					<div class="bg-white rounded-3 shadow-sm position-relative" style="min-height: 70vh;">
+						<div class="sticky-top w-100 p-3 d-flex align-items-center">
+							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+							<div class="fs-5 fw-bold">Jean michmich</div>
+						</div>
+
+						<div class="p-3" style="min-height: 70vh; max-height: 70vh; overflow-y: auto;">
+							<div class="d-flex align-items-end mb-3">
+								<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+								<div>
+									<div style="font-size: 12px;">
+										Jean michmich
+									</div>
+									<div class="d-flex align-items-center">
+										<div class="rounded bg-light p-3">
+											Salut ça va ?
+										</div>
+										<div class="d-flex align-items-center ms-3">
+											<i class="fa-solid fa-thumbs-up text-primary"></i>
+											<i class="fa-solid fa-thumbs-down text-muted ms-2"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="d-flex align-items-end justify-content-end mb-3">
+								<div class="d-flex flex-column align-items-end">
+									<div style="font-size: 12px;">
+										Moi
+									</div>
+									<div class="d-flex align-items-center">
+										<div class="d-flex align-items-center me-3">
+											<i class="fa-solid fa-thumbs-up text-primary"></i>
+										</div>
+										<div class="rounded bg-primary text-white p-3">
+											Franchement ça va et toi?
+										</div>
+									</div>
+									<div class="d-flex align-items-center mt-1">
+										<div class="rounded-circle bg-light" style="height: 20px; width: 20px;"></div>
+									</div>
+								</div>
+								<div class="rounded-circle bg-light ms-3" style="height: 50px; width: 50px;"></div>
+							</div>
+						</div>
+
+						<div class="sticky-bottom bg-white w-100 p-3 d-flex align-items-center">
+							<input type="text" class="form-control shadow-none me-3" placeholder="Message..." style="width: 80%; height: 40px;"/>
+							<button class="btn btn-primary shadow-none border-none" style="height: 40px; width: 200px;">
+								Send
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

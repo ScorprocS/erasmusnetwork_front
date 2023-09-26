@@ -14,7 +14,7 @@ public class NavigationController {
 	public String getMessage(Model model) {
 		String uri = "http://localhost:8086/api/groups/";
 		RestTemplate restTemplate = new RestTemplate();
-		
+
 		ResponseEntity<Group[]> responseEntity = restTemplate.getForEntity(uri, Group[].class);
 		Group[] groups = responseEntity.getBody();
 
@@ -24,6 +24,6 @@ public class NavigationController {
 
 		model.addAttribute("groups", groups);
 
-		return "message/message";
+		return "message/index";
 	}
 }
