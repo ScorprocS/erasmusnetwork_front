@@ -5,11 +5,13 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Liste des users likés</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     </head>
 <body>
+	<div class="container mx-auto">
     <h1>Liste des users likés</h1>
     
-    <table border="1">
+    <table border="1" class="table">
 		<tr>
 			<th>User qui a liké</th>
 			<th>User liké</th>
@@ -21,6 +23,7 @@
 			<td th:utext="${user.like}"></td>
 		</tr>
 	</table>
-    
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
