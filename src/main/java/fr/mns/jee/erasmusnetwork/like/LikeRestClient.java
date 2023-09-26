@@ -36,6 +36,9 @@ public interface LikeRestClient {
     @GetMapping(value="/user/all")
     List<LikedUserStruct> getUsersList();
     
+    @GetMapping(value="/user/allLikedBy")
+    List<LikedUserStruct> getUsersById(@RequestHeader int userId);
+    
 
     @GetMapping(value="/comment/all")
 	List<LikedCommentStruct> findAllComments();

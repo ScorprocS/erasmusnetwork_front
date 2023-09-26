@@ -9,17 +9,15 @@
 <body>
     <h1>Liste des users likés</h1>
     
-    <p aria-valuetext=""></p>
-    
     <table border="1">
 		<tr>
-			<th>User liké</th>
 			<th>User qui a liké</th>
+			<th>User liké</th>
 			<th>Type de like</th>
 		</tr>
 		<tr th:each = "user : ${usersList}">
-			<td th:utext="${user.likedUserId}"></td>
 			<td th:utext="${user.userId}"></td>
+			<td th:utext="${user.likedUserId}"></td>
 			<td th:utext="${user.like}"></td>
 		</tr>
 	</table>
