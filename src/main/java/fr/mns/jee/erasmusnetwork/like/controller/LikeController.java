@@ -9,8 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/stats")
 public class LikeController {
 
-	@GetMapping("/")
-	public ModelAndView getPersons() {
+	@GetMapping("")
+	public ModelAndView getStats() {
 		ModelAndView mv = new ModelAndView("like/stats");
 		return mv;
 	}
