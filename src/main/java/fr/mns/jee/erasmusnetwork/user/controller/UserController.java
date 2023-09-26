@@ -25,6 +25,7 @@ public class UserController {
         ModelAndView mv = new ModelAndView("users/users");
         List<User> usersList = userService.getUsers();
         mv.addObject(usersList);
+        mv.addObject("currentUser", userService.getCurrentUser());
         return mv;
     }
 }

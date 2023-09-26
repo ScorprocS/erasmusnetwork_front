@@ -31,6 +31,14 @@
           </tbody>
         </table>
     </div>
+    <div th:if="${currentUser != null}">
+        <hr/>
+        Current user ID : <span th:text="${currentUser.id}"/>
+        <br/>
+        Current user email/username : <span th:text="${currentUser.email}"/>
+        <br/>
+        Current user password : <span th:text="${currentUser.password}"/> &lt;= pourquoi il est en clair ? j'en sais rien
+    </div>
     <br><br><br><br><br><br><br><br>
 </body>
 </html>

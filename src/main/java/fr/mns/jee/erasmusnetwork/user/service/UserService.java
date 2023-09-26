@@ -5,8 +5,11 @@ import fr.mns.jee.erasmusnetwork.user.dto.CreateUserRequest;
 import fr.mns.jee.erasmusnetwork.user.dto.GetUserByEmailRequest;
 import fr.mns.jee.erasmusnetwork.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,5 +44,13 @@ public class UserService {
 
     public void deleteUser(Long userId){
        userRestClient.deleteUser(userId);
+    }
+
+//    public User getCurrentUser(Principal principal){
+//        return userRestClient.getCurrentUser();
+//    }
+    public User getCurrentUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return getUsers().stream().filter(u -> u.getUsername() == authentication.getName()).findFirst().orElseThrow();
     }
 }

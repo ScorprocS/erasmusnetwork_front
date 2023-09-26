@@ -33,4 +33,7 @@ public interface UserRestClient {
 
     @PutMapping(value = "/{userId}/disable")
     User disableUser(@PathVariable("userId") Long userId);
+
+//    @GetMapping(value = "/getCurrentUser")
+//    User getCurrentUser();
 }
