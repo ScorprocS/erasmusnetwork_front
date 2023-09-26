@@ -20,7 +20,7 @@ public interface UserRestClient {
     User getUserById(@PathVariable("userId") Long userId);
 
     @DeleteMapping(value = "/{userId}")
-    void deletePerson(@PathVariable("userId") Long userId);
+    void deleteUser(@PathVariable("userId") Long userId);
 
     @PostMapping(value = "/")
     User createUser(@RequestBody CreateUserRequest request);
