@@ -8,7 +8,11 @@ import fr.mns.jee.erasmusnetwork.message.model.Group;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.Set;
 
 @Controller
 public class NavigationController {
@@ -17,9 +21,18 @@ public class NavigationController {
 	private GroupAPIService groupAPIService;
 
 	@GetMapping(value = "/message")
-	public String getMessage(Model model) {
+	public String getMessage(Model model, @RequestParam(required = false, name = "group") Long groupId) {
+		Long CurrentMemberId = 1L;
+		Group[] groups = groupAPIService.getAllByMemberId(CurrentMemberId);
+		model.addAttribute("groups", groups);
+		model.addAttribute("CurrentMemberId", CurrentMemberId);
 
-		model.addAttribute("groups", groupAPIService.getAllByMemberId(1L));
+		if (groupId != null) {
+			Group currentGroup = groupAPIService.getById(groupId);
+			if (currentGroup != null) {
+				model.addAttribute("currentGroup", currentGroup);
+			}
+		}
 
 		return "message/index";
 	} 

@@ -74,51 +74,50 @@
 						Add group
 					</button>
 				</div>
-				<div class="col-9"  th:if="${param.group != null}">
+				<div class="col-9"  th:if="${currentGroup}">
+
 					<div class="bg-white rounded-3 shadow-sm position-relative" style="min-height: 70vh;">
 						<div class="sticky-top w-100 p-3 d-flex align-items-center">
 							<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
-							<div class="fs-5 fw-bold">Jean michmich</div>
+							<div class="fs-5 fw-bold" th:text="${currentGroup.name}"></div>
 						</div>
 
 						<div class="p-3" style="min-height: 70vh; max-height: 70vh; overflow-y: auto;">
-							<div class="d-flex align-items-end mb-3">
-								<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
-								<div>
-									<div style="font-size: 12px;">
-										Jean michmich
-									</div>
-									<div class="d-flex align-items-center">
-										<div class="rounded bg-light p-3">
-											Salut ça va ?
+							<div th:each="message : ${currentGroup.getMessages()}" class="mb-3">
+
+								<div th:if="${message.getSenderId().isPresent() && message.getSenderId().get() == CurrentMemberId}"
+									 class="d-flex align-items-end justify-content-end mb-3">
+									<div class="d-flex flex-column align-items-end">
+										<div style="font-size: 12px;">Moi</div>
+										<div class="d-flex align-items-center">
+											<div class="d-flex align-items-center me-3">
+												<i class="fa-solid fa-thumbs-up text-primary"></i>
+											</div>
+											<div class="rounded bg-primary text-white p-3" th:text="${message.content}"></div>
 										</div>
-										<div class="d-flex align-items-center ms-3">
-											<i class="fa-solid fa-thumbs-up text-primary"></i>
-											<i class="fa-solid fa-thumbs-down text-muted ms-2"></i>
+										<div class="d-flex align-items-center mt-1">
+											<div class="rounded-circle bg-light" style="height: 20px; width: 20px;"></div>
+										</div>
+									</div>
+									<div class="rounded-circle bg-light ms-3" style="height: 50px; width: 50px;"></div>
+								</div>
+
+								<div th:unless="${message.getSenderId().isPresent() && message.getSenderId().get() == CurrentMemberId}"
+									 class="d-flex align-items-end mb-3">
+									<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+									<div>
+										<div style="font-size: 12px;" th:text="senderName"></div>
+										<div class="d-flex align-items-center">
+											<div class="rounded bg-light p-3" th:text="${message.content}"></div>
+											<div class="d-flex align-items-center ms-3">
+												<i class="fa-solid fa-thumbs-up text-primary"></i>
+												<i class="fa-solid fa-thumbs-down text-muted ms-2"></i>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 
-							<div class="d-flex align-items-end justify-content-end mb-3">
-								<div class="d-flex flex-column align-items-end">
-									<div style="font-size: 12px;">
-										Moi
-									</div>
-									<div class="d-flex align-items-center">
-										<div class="d-flex align-items-center me-3">
-											<i class="fa-solid fa-thumbs-up text-primary"></i>
-										</div>
-										<div class="rounded bg-primary text-white p-3">
-											Franchement ça va et toi?
-										</div>
-									</div>
-									<div class="d-flex align-items-center mt-1">
-										<div class="rounded-circle bg-light" style="height: 20px; width: 20px;"></div>
-									</div>
-								</div>
-								<div class="rounded-circle bg-light ms-3" style="height: 50px; width: 50px;"></div>
-							</div>
 						</div>
 
 						<div class="sticky-bottom bg-white w-100 p-3 d-flex align-items-center">

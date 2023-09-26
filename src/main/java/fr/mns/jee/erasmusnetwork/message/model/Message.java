@@ -3,6 +3,7 @@ package fr.mns.jee.erasmusnetwork.message.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class Message implements Serializable {
@@ -18,6 +19,8 @@ public class Message implements Serializable {
     private Message parent;
 
     private Member sender;
+
+    private Long senderId;
 
     private Set<MemberMessageView> views = new HashSet<MemberMessageView>();
 
@@ -75,5 +78,12 @@ public class Message implements Serializable {
 
     public void setViews(Set<MemberMessageView> views) {
         this.views = views;
+    }
+
+    public Optional<Long> getSenderId() {
+        if (senderId == null) {
+            return Optional.empty();
+        }
+        return Optional.of(senderId);
     }
 }

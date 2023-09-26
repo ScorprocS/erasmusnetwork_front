@@ -2,7 +2,9 @@ package fr.mns.jee.erasmusnetwork.message.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Group implements Serializable {
     private Long id;
@@ -48,7 +50,7 @@ public class Group implements Serializable {
     }
 
     public Set<Message> getMessages() {
-        return messages;
+        return messages.stream().sorted((m1, m2) -> m1.getCreatedAt().compareTo(m2.getCreatedAt())).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public Message getLastMessage() {
