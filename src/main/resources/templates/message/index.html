@@ -83,6 +83,7 @@
 						</div>
 
 						<div class="p-3" style="min-height: 70vh; max-height: 70vh; overflow-y: auto;">
+							<div th:if ="${currentGroup.getMessages().isEmpty()}" class="text-center text-muted">Aucun message</div>
 							<div th:each="message : ${currentGroup.getMessages()}" class="mb-3">
 
 								<div th:if="${message.getSenderId().isPresent() && message.getSenderId().get() == CurrentMemberId}"
