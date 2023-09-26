@@ -24,10 +24,10 @@
 					<a class="nav-link" th:href="@{/stats/comment}">Commentaires</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Posts</a>
+					<a class="nav-link" th:href="@{/stats/post}">Posts</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Users</a>
+					<a class="nav-link" th:href="@{/stats/user}">Users</a>
 				</li>
 			</ul>
 		</div>
@@ -52,6 +52,24 @@
 
 		<div class="container">
 			<h2>Liste des commentaires likés par utilisateur</h2>
+			<form th:action="@{/stats/commentByUser}">
+				<input name="userId" type="number" th:value="${userId}">
+				<button type="submit">Rechercher</button>
+			</form>
+			<div th:if="${userLikedComments != null && !userLikedComments.isEmpty()}">
+				table class="table table-striped">
+				<tr>
+					<th scope="col">Commentaire liké</thscope="col">
+					<th scope="col">User qui a liké</th>
+					<th scope="col">Type de like</th>
+				</tr>
+				<tr th:each="comment: ${userLikedComments}">
+					<td th:utext="${comment.commentId}"></td>
+					<td th:utext="${comment.userId}"></td>
+					<td th:utext="${comment.like}"></td>
+				</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 

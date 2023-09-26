@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.mns.jee.erasmusnetwork.like.LikeRestClient;
@@ -26,6 +26,8 @@ public class LikeController {
 		return mv;
 	}
 
+	
+	
 	@GetMapping("/users")
 	public ModelAndView getStatsUsers() {
 		ModelAndView mv = new ModelAndView("like/users");
@@ -40,6 +42,8 @@ public class LikeController {
 		return mv;
 	}
 	
+	
+	
 
 	@GetMapping("/comment")
 	public String getCommentStats(Model model) {
@@ -47,8 +51,8 @@ public class LikeController {
 		return "like/stats";
 	}
 	
-	@PostMapping("/commentByUser")
-	public String getCommentsByUserId(Model model, @ModelAttribute("userId") int userId) {
+	@GetMapping("/commentByUser")
+	public String getCommentsByUserId(Model model, @RequestParam(name = "userId") int userId) {
 		model.addAttribute("userLikedComments", client.findById(userId));
 		return "like/stats";
 	}
