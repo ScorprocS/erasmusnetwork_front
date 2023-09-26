@@ -51,6 +51,10 @@ public class Group implements Serializable {
         return messages;
     }
 
+    public Message getLastMessage() {
+        return messages.stream().min((m1, m2) -> m2.getCreatedAt().compareTo(m1.getCreatedAt())).orElse(null);
+    }
+
     public void setMessages(Set<Message> messages) {
         this.messages = messages;
     }
