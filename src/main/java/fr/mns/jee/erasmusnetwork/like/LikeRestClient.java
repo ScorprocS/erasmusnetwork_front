@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -32,9 +33,9 @@ public interface LikeRestClient {
     @DeleteMapping(value="/comment/unlike")
     String unlikeComment(@RequestHeader int entityId);
 
-    @DeleteMapping(value="/comment/all")
+    @GetMapping(value="/comment/all")
 	List<LikedCommentStruct> findAllComments();
 
-    @DeleteMapping(value="/comment/allLikedBy")
+    @GetMapping(value="/comment/allLikedBy")
 	List<LikedCommentStruct> findById(int userId);
 }

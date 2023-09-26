@@ -33,7 +33,7 @@ public class LikeController {
 		return mv;
 	}
 	
-	@PostMapping("/comment")
+	@PostMapping("/commentByUser")
 	public List<LikedCommentStruct> getCommentsByUserId(@RequestParam int userId) {
 		return client.findById(userId);
 	}
