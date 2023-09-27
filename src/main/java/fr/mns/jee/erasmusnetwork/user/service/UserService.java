@@ -18,8 +18,8 @@ public class UserService {
     @Autowired
     private UserRestClient userRestClient;
 
-    public Optional<User> getUserByEmail(String email){
-        return userRestClient.getUserByEmail(new GetUserByEmailRequest(email));
+    public User getUserByEmail(String email){
+        return userRestClient.getUserByEmail(email);
     }
 
     public User getUserById(Long userId){
@@ -51,6 +51,7 @@ public class UserService {
 //    }
     public User getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return getUsers().stream().filter(u -> u.getUsername() == authentication.getName()).findFirst().orElseThrow();
+        return getUserByEmail(authentication.getName());
+//        return getUsers().stream().filter(u -> u.getUsername() == authentication.getName()).findFirst().orElseThrow();
     }
 }
