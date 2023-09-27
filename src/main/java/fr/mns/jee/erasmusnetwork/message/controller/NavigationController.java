@@ -51,7 +51,7 @@ public class NavigationController {
 			if (currentGroup != null) {
 				model.addAttribute("currentGroup", currentGroup);
 				Member[] members = memberAPIService.getMembersByGroup(currentGroup.getId());
-				String membersList = Arrays.stream(members).map(Member::getCustomName).collect(Collectors.joining(", "));
+				String membersList = Arrays.stream(members).sorted((m1, m2) -> m1.getCustomName().compareTo(m2.getCustomName())).map(Member::getCustomName).collect(Collectors.joining(", "));
 				model.addAttribute("membersList", membersList);
 			}
 		}
