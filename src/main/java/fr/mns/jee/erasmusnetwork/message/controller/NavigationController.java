@@ -3,6 +3,7 @@ package fr.mns.jee.erasmusnetwork.message.controller;
 import fr.mns.jee.erasmusnetwork.message.model.Member;
 import fr.mns.jee.erasmusnetwork.message.model.User;
 import fr.mns.jee.erasmusnetwork.message.model.Member;
+import fr.mns.jee.erasmusnetwork.message.service.AuthService;
 import fr.mns.jee.erasmusnetwork.message.service.GroupAPIService;
 import fr.mns.jee.erasmusnetwork.message.service.MemberAPIService;
 import fr.mns.jee.erasmusnetwork.message.service.MessageAPIService;
@@ -35,13 +36,16 @@ public class NavigationController {
 	@Autowired
 	private MemberAPIService memberAPIService;
 
+	@Autowired
+	private AuthService authService;
+
 	@GetMapping(value = "/chats")
 	public String getMessage(
 			Model model,
 			@RequestParam(required = false, name = "group") Long groupId,
 			@RequestParam(required = false, name = "new") Boolean newChat
 	) {
-		Long CurrentMemberId = 1L;
+		Long CurrentMemberId = authService.getCurrentMember().getId();
 		Group[] groups = groupAPIService.getAllByMemberId(CurrentMemberId);
 		model.addAttribute("groups", groups);
 		model.addAttribute("CurrentMemberId", CurrentMemberId);
@@ -75,7 +79,7 @@ public class NavigationController {
 			@RequestParam(required = false, name= "members") String[] membersIds,
 			@RequestParam(required = false, name= "groupName") String groupName
 	) {
-		Long CurrentMemberId = 1L;
+		Long CurrentMemberId = authService.getCurrentMember().getId();
 
 		if (groupId != null && message != null) {
 			messageAPIService.createMessage(groupId, message, CurrentMemberId);

@@ -11,6 +11,8 @@ public class Member implements Serializable {
 
     private Set<Group> groups;
 
+    private Long userId;
+
     private Set<MemberMessageView> membersViews = new HashSet<MemberMessageView>();
 
     public Long getId() {
@@ -35,5 +37,13 @@ public class Member implements Serializable {
 
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
