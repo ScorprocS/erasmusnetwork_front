@@ -98,7 +98,7 @@ public class NavigationController {
 
 			Member member = new Member();
 
-			member.setId(1L);
+			member.setId(CurrentMemberId);
 
 			members.add(member);
 
