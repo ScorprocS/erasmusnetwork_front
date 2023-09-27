@@ -3,7 +3,6 @@ package fr.mns.jee.erasmusnetwork.annonce.controller;
 
 import fr.mns.jee.erasmusnetwork.annonce.form.BookForm;
 import fr.mns.jee.erasmusnetwork.annonce.form.HouseForm;
-import fr.mns.jee.erasmusnetwork.annonce.model.Bed;
 import fr.mns.jee.erasmusnetwork.annonce.model.House;
 import fr.mns.jee.erasmusnetwork.annonce.service.ApiService;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,15 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/collocation")
@@ -33,17 +28,30 @@ public class CollocationController {
 
     @GetMapping({"", "/"})
     public ModelAndView getCollocation() {
+        try {
+            House[] houses = apiService.getHouses();
 
-        House[] houses = apiService.getHouses();
+            ModelAndView mv = new ModelAndView("Annonce/annonce");
 
-        ModelAndView mv = new ModelAndView("Annonce/annonce");
+            mv.addObject("houses", houses);
+            return mv;
+        } catch (Exception e) {
+            ModelAndView mv = new ModelAndView("Annonce/error");
+            mv.addObject("error", e);
+            return mv;
+        }
+    }
 
-        mv.addObject("houses", houses);
+    @GetMapping("/error")
+    public ModelAndView error() {
+        ModelAndView mv = new ModelAndView("Annonce/error");
+        mv.addObject("error", "Une erreur est survenue.");
         return mv;
     }
 
     @GetMapping("/{id}")
     public ModelAndView getCollocationById(@PathVariable("id") String id) {
+        try {
         House house = apiService.getHouseWithId(id);
 
         ModelAndView mv = new ModelAndView("Annonce/details");
@@ -57,27 +65,43 @@ public class CollocationController {
         mv.addObject("availableQuantity", availableQuantity);
         return mv;
 
+        } catch (Exception e) {
+            ModelAndView mv = new ModelAndView("Annonce/error");
+            mv.addObject("error", e);
+            return mv;
+        }
     }
 
     @GetMapping("/add")
     public ModelAndView getAddCollocation() {
-
-        ModelAndView mv = new ModelAndView("Annonce/addCollocation");
-        mv.addObject("houseForm", new HouseForm());
-        return mv;
+        try {
+            ModelAndView mv = new ModelAndView("Annonce/addCollocation");
+            mv.addObject("houseForm", new HouseForm());
+            return mv;
+        } catch (Exception e) {
+            ModelAndView mv = new ModelAndView("Annonce/error");
+            mv.addObject("error", e);
+            return mv;
+        }
     }
 
     @PostMapping("/add")
     public String createNewHouse(@ModelAttribute("houseForm") House house) {
-        apiService.postHouse(house);
-        return "redirect:/collocation";
+        try {
+            apiService.postHouse(house);
+            return "redirect:/collocation";
+        } catch (Exception e) {
+            return "redirect:/error";
+        }
     }
 
     @PostMapping("/{id}/book")
     public String book(@PathVariable("id") String id, @ModelAttribute("bookForm") BookForm bookForm) {
-        System.out.print(bookForm.getQuantity().toString());
-        System.out.print("  <-");
-        apiService.postBook(id, bookForm);
-        return "redirect:/collocation";
+        try {
+            apiService.postBook(id, bookForm);
+            return "redirect:/collocation";
+        } catch (Exception e) {
+            return "redirect:/error";
+        }
     }
 }
