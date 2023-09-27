@@ -22,6 +22,18 @@
 			<td th:utext="${user.userId}"></td>
 			<td th:utext="${user.likedUserId}"></td>
 			<td th:utext="${user.like}"></td>
+			<td th:if="${user.like.toString() == 'WOAW'}">
+				<img th:src="@{/images/WAOW.jpg}" alt="WOAW" class="h-50"/>
+			</td>
+			<td th:if="${user.like.toString() == 'LIKE'}">
+				<img th:src="@{/images/LIKE.png}" alt="LIKE" class="h-50"/>
+			</td>
+			<td th:if="${user.like.toString() =='LOVE'}">
+				<img th:src="@{/images/LOVE.png}" alt="LOVE" class="h-50"/>
+			</td>
+			<td th:if="${user.like.toString() == 'BRAVO'}">
+				<img th:src="@{/images/BRAVO.png}" alt="BRAVO" class="h-50"/>
+			</td>
 		</tr>
 	</table>
 	</div>
