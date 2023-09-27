@@ -10,4 +10,6 @@ public class MemberAPIService extends AbstractApiService {
     public Member getById(Long id) {
         return (Member) query("members/" + id, Member.class).getBody();
     }
+
+    public Member[] getMembersByGroup(Long id) { return (Member[]) query("groups/" + id + "/members", Member[].class).getBody();}
 }

@@ -1,7 +1,9 @@
 package fr.mns.jee.erasmusnetwork.message.controller;
 
 import fr.mns.jee.erasmusnetwork.message.model.User;
+import fr.mns.jee.erasmusnetwork.message.model.Member;
 import fr.mns.jee.erasmusnetwork.message.service.GroupAPIService;
+import fr.mns.jee.erasmusnetwork.message.service.MemberAPIService;
 import fr.mns.jee.erasmusnetwork.message.service.MessageAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class NavigationController {
@@ -24,6 +27,9 @@ public class NavigationController {
 
 	@Autowired
 	private MessageAPIService messageAPIService;
+
+	@Autowired
+	MemberAPIService memberAPIService;
 
 	@GetMapping(value = "/message")
 	public String getMessage(Model model, @RequestParam(required = false, name = "group") Long groupId) {
@@ -36,6 +42,9 @@ public class NavigationController {
 			Group currentGroup = groupAPIService.getById(groupId);
 			if (currentGroup != null) {
 				model.addAttribute("currentGroup", currentGroup);
+				Member[] members = memberAPIService.getMembersByGroup(currentGroup.getId());
+				String membersList = Arrays.stream(members).map(Member::getCustomName).collect(Collectors.joining(", "));
+				model.addAttribute("membersList", membersList);
 			}
 		}
 
