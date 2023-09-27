@@ -21,7 +21,7 @@
             </tr>
           </thead>
           <tbody>
-          <tr class="text-center" th:each="user : ${usersList}">
+          <tr class="text-center" th:each="user : ${userList}">
               <td th:text="${user.id}"></td>
               <td th:text="${user.email}"></td>
               <td th:text="${user.password}"></td>
@@ -37,7 +37,7 @@
         <br/>
         Current user email/username : <span th:text="${currentUser.email}"/>
         <br/>
-        Current user password : <span th:text="${currentUser.password}"/> &lt;= pourquoi il est en clair ? j'en sais rien
+        Current user password : <span th:text="${currentUser.password}"/>
     </div>
     <br><br><br><br><br><br><br><br>
 </body>
