@@ -39,6 +39,20 @@
         <br/>
         Current user password : <span th:text="${currentUser.password}"/>
     </div>
+    <hr/>
+    <form action="" method="get">
+        <input type="text" name="searchByEmail" id="searchByEmail"/>
+        <input type="submit"/>
+    </form>
+    <div th:if="${userFound != null}">
+        Search result :
+        <br/>
+        user ID : <span th:text="${userFound.id}"/>
+        <br/>
+        user email/username : <span th:text="${userFound.email}"/>
+        <br/>
+        user password : <span th:text="${userFound.password}"/>
+    </div>
     <br><br><br><br><br><br><br><br>
 </body>
 </html>
