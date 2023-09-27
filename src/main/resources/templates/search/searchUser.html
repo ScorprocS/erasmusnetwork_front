@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Search User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .center-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        .navbar-brand {
+            color: #ffffff !important;
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff !important;
+        }
+        .navbar {
+            background-color: #007bff !important;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">Erasmus Network</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/search">Search User</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--... (rest of the file) ...-->
+<div class="container mt-5">
+    <h2>Search User</h2>
+    <form id="searchForm">
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" id="location" name="location">
+        </div>
+        <div class="form-group">
+            <label for="program">Program:</label>
+            <input type="text" class="form-control" id="program" name="program">
+        </div>
+        <div class="form-group">
+            <label for="university">University:</label>
+            <input type="text" class="form-control" id="university" name="university">
+        </div>
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" class="form-control" id="country" name="country">
+        </div>
+        <button type="button" class="btn btn-primary" id="searchButton">Search</button>
+    </form>
+    <div id="resultsDiv" class="mt-4" style="display:none;">
+        <h3>Results</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Program</th>
+                <th>University</th>
+                <th>Country</th>
+            </tr>
+            </thead>
+            <tbody id="resultsTableBody">
+            <!-- Les résultats seront insérés ici par JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var location = document.getElementById('location').value;
+        var program = document.getElementById('program').value;
+        var university = document.getElementById('university').value;
+        var country = document.getElementById('country').value;
+
+        var apiUrl = `http://localhost:8085/api/users/searchUsers?location=${location}&program=${program}&university=${university}&country=${country}`;
+        console.log(apiUrl);
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(users => {
+                var resultsDiv = document.getElementById('resultsDiv');
+                var resultsTableBody = document.getElementById('resultsTableBody');
+                resultsTableBody.innerHTML = ''; // Clear existing results
+
+                users.forEach(user => {
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${user.name}</td><td>${user.location}</td><td>${user.program}</td><td>${user.university}</td><td>${user.country}</td>`;
+                    resultsTableBody.appendChild(tr);
+                });
+
+                resultsDiv.style.display = 'block'; // Show results div
+            })
+            .catch(err => console.error('Error fetching users:', err));
+    });
+</script>
+</body>
+</html>
