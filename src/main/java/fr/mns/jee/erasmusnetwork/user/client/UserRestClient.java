@@ -1,9 +1,12 @@
 package fr.mns.jee.erasmusnetwork.user.client;
 
+import feign.Param;
+import feign.RequestLine;
 import fr.mns.jee.erasmusnetwork.user.dto.CreateUserRequest;
 import fr.mns.jee.erasmusnetwork.user.dto.GetUserByEmailRequest;
 import fr.mns.jee.erasmusnetwork.user.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
@@ -25,8 +28,10 @@ public interface UserRestClient {
     @PostMapping(value = "/")
     User createUser(@RequestBody CreateUserRequest request);
 
-    @GetMapping(value = "/getByEmail")
-    User getUserByEmail(@RequestParam(name = "email") String email);
+//    @RequestMapping(method = RequestMethod.GET, value = "/getByEmail?email={email}")
+//    @RequestLine("GET /getByEmail?email={email}")
+    @PostMapping(value = "/getByEmail")
+    User getUserByEmail(@RequestBody GetUserByEmailRequest request);
 
     @PutMapping(value = "/{userId}/enable")
     User enableUser(@PathVariable("userId") Long userId);

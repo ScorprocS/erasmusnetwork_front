@@ -9,9 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,7 +17,7 @@ public class UserService {
     private UserRestClient userRestClient;
 
     public User getUserByEmail(String email){
-        return userRestClient.getUserByEmail(email);
+        return userRestClient.getUserByEmail(new GetUserByEmailRequest(email));
     }
 
     public User getUserById(Long userId){
