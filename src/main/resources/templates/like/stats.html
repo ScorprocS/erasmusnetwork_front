@@ -14,12 +14,12 @@
 <body>
 	<div th:replace="fragments/navbar :: navbar"></div>
 
-	<div class="container">
+	<div class="container mt-3 mb-3">
 		<div class="row">
-			<div class="col-sm-12 text-center">
-				<button th:href="@{/stats/comment}" class="btn btn-primary btn-md">Commentaires</button>
-				<button th:href="@{/stats/post}" class="btn btn-primary btn-md">Posts</button>
-				<button th:href="@{/stats/user}" class="btn btn-primary btn-md">Users</button>
+			<div class="col-sm-12">
+				<a th:href="@{/stats/comment}" class="btn btn-primary btn-md">Commentaires</a>
+				<a th:href="@{/stats/post}" class="btn btn-primary btn-md">Posts</a>
+				<a th:href="@{/stats/user}" class="btn btn-primary btn-md">Users</a>
 			</div>
 		</div>
 	</div>
