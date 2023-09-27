@@ -58,7 +58,7 @@
 		<div class="w-100 bg-light flex align-items-start rounded-3 shadow-sm mt-4" style="min-height: 70vh;">
 			<div class="row align-items-start p-3" style="min-height: 70vh;">
 				<div class="col-3" >
-					<div class="bg-white rounded-3 shadow-sm p-3" style="min-height: 70vh; max-height: 70vh; overflow-y: auto;">
+					<div class="bg-white rounded-3 shadow-sm p-3" style="min-height: 70vh; max-height: 70vh; overflow-y: auto;" id="message-container">
 						<a th:each="group : ${groups}" th:href="@{'/message?group=' + ${group.id}}" class="no-link-style">
 							<div th:class="${#lists.contains(param.group, group.id.toString())} ? 'd-flex align-items-center bg-primary rounded p-3 text-white mb-3' : 'd-flex align-items-center p-3 mb-3'" style="height: 90px;">
 								<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
@@ -122,10 +122,12 @@
 						</div>
 
 						<div class="sticky-bottom bg-white w-100 p-3 d-flex align-items-center">
-							<input type="text" class="form-control shadow-none me-3" placeholder="Message..." style="width: 80%; height: 40px;"/>
-							<button class="btn btn-primary shadow-none border-none" style="height: 40px; width: 200px;">
-								Send
-							</button>
+							<form th:action="@{'/message?group=' + ${currentGroup.id}}" method="post" class="d-flex align-items-center w-100">
+								<input type="text" class="form-control shadow-none me-3" placeholder="Message..." style="width: 80%; height: 40px;" name="message" />
+								<button class="btn btn-primary shadow-none border-none" style="height: 40px; width: 200px;">
+									Send
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>

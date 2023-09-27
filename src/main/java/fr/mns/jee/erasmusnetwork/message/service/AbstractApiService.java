@@ -12,4 +12,10 @@ public abstract class AbstractApiService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForEntity(baseUrl + uri, clazz);
     }
+
+    public boolean create(String uri, Object object) {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<?> responseEntity = restTemplate.postForEntity(baseUrl + uri, object, Object.class);
+        return responseEntity.getStatusCode().is2xxSuccessful();
+    }
 }
