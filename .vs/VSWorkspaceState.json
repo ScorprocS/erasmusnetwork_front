@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src\\main",
+    "\\src\\main\\resources",
+    "\\src\\main\\resources\\templates\\fragments",
+    "\\src\\main\\resources\\templates\\search",
+    "\\src\\test",
+    "\\src\\test\\java",
+    "\\src\\test\\java\\com",
+    "\\src\\test\\java\\com\\example",
+    "\\src\\test\\java\\com\\example\\demo"
+  ],
+  "PreviewInSolutionExplorer": false
+}

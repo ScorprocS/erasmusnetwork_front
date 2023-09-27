@@ -1,4 +1,4 @@
-package fr.mns.jee.erasmusnetwork.search.model;
+package fr.mns.jee.erasmusnetwork.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,48 +1,52 @@
-package fr.mns.jee.erasmusnetwork.controller.controller;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.mns.jee.erasmusnetwork.controller.model.User;
-import org.springframework.web.bind.annotation.*;
+package fr.mns.jee.erasmusnetwork.search.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+import fr.mns.jee.erasmusnetwork.controller.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final String filePath = "users.json";
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @GetMapping("/search")
-    public List<User> searchUsers(
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String program,
-            @RequestParam(required = false) String university
-    ) throws IOException {
-        List<User> users = getUsersFromFile();
+    private final WebClient webClient;
 
-        if (location != null) {
-            users = users.stream().filter(user -> location.equals(user.getLocation())).collect(Collectors.toList());
-        }
-        if (program != null) {
-            users = users.stream().filter(user -> program.equals(user.getProgram())).collect(Collectors.toList());
-        }
-        if (university != null) {
-            users = users.stream().filter(user -> university.equals(user.getUniversity())).collect(Collectors.toList());
-        }
-
-        return users;
+    public UserController(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8085").build();
     }
 
-    private List<User> getUsersFromFile() throws IOException {
-        File file = new File(filePath);
-        if (file.exists()) {
-            return objectMapper.readValue(file, new TypeReference<>() {});
-        }
-        return new ArrayList<>();
+    @GetMapping("/searchUsers")
+    public Mono<List<User>> searchUsers(
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String program,
+            @RequestParam(required = false) String university,
+            @RequestParam(required = false) String country
+    ) {
+        logger.info("Début de la méthode searchUsers");
+        logger.info("Location: " + location);
+        logger.info("Program: " + program);
+        logger.info("University: " + university);
+        logger.info("University: " + country);
+
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/api/users/searchUsers")
+                        .queryParamIfPresent("location", Optional.ofNullable(location))
+                        .queryParamIfPresent("program", Optional.ofNullable(program))
+                        .queryParamIfPresent("university", Optional.ofNullable(university))
+                        .queryParamIfPresent("university", Optional.ofNullable(country))
+                        .build())
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<User>>() {})
+                .doOnNext(users -> logger.info("Users found: " + users.size()))
+                .doOnError(throwable -> logger.error("Error occurred while fetching users", throwable));
     }
 }
