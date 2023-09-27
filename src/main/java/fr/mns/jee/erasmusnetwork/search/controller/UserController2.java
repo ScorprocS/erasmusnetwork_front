@@ -13,13 +13,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class UserController2 {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController2.class);
 
     private final WebClient webClient;
 
-    public UserController(WebClient.Builder webClientBuilder) {
+    public UserController2(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8085").build();
     }
 
