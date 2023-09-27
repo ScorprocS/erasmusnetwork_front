@@ -1,10 +1,12 @@
 package fr.mns.jee.erasmusnetwork.annonce.controller;
 
 
+import fr.mns.jee.erasmusnetwork.annonce.form.BookForm;
+import fr.mns.jee.erasmusnetwork.annonce.form.HouseForm;
 import fr.mns.jee.erasmusnetwork.annonce.model.Bed;
 import fr.mns.jee.erasmusnetwork.annonce.model.House;
 import fr.mns.jee.erasmusnetwork.annonce.service.ApiService;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +23,7 @@ import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/collocation")
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 public class CollocationController {
 
     private final ApiService apiService;
@@ -46,6 +49,7 @@ public class CollocationController {
 
         ModelAndView mv = new ModelAndView("Annonce/details");
         mv.addObject("house", house);
+        mv.addObject("bookForm", new BookForm());
 
         List<Integer> availableQuantity = new ArrayList<>();
         for (int i = 1; i <= house.bedAvailable(); i++) {
@@ -60,20 +64,21 @@ public class CollocationController {
     public ModelAndView getAddCollocation() {
 
         ModelAndView mv = new ModelAndView("Annonce/addCollocation");
+        mv.addObject("houseForm", new HouseForm());
         return mv;
-
     }
 
-    //@PostMapping("/add")
-    //public String createNewHouse(@ModelAttribute("houseForm") House house) {
-//
-    //    house.setId(null);
-    //    house.setNomCollocation();
-    //    house.setDescription();
-    //    house.setNbrPlace();
-    //    repository.save(person);
-//
-    //    return "redirect:/annonce";
-//
-    //}
+    @PostMapping("/add")
+    public String createNewHouse(@ModelAttribute("houseForm") House house) {
+        apiService.postHouse(house);
+        return "redirect:/collocation";
+    }
+
+    @PostMapping("/{id}/book")
+    public String book(@PathVariable("id") String id, @ModelAttribute("bookForm") BookForm bookForm) {
+        System.out.print(bookForm.getQuantity().toString());
+        System.out.print("  <-");
+        apiService.postBook(id, bookForm);
+        return "redirect:/collocation";
+    }
 }

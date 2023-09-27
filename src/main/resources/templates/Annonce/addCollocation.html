@@ -13,23 +13,25 @@
 
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
-<h1>Erasmus Network</h1>
 
-<form th:action="@{/collocation/add}" th:object="${house}" method="POST">
+<form th:action="@{/collocation/add}" th:object="${houseForm}" method="POST">
     <div class="mx-auto" style="width: 800px;">
+        <h1 class="text-center">Ajouter une collocation</h1>
+        <a href="/collocation" class="btn btn-outline-primary my-4">Retour</a>
+
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nom de la collocation</label>
-            <input type="text" class="form-control" id="Name" aria-describedby="emailHelp">
+            <label for="name" class="form-label">Nom de la collocation</label>
+            <input  class="form-control" type="text" th:field="*{name}" id="name" />
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Description</label>
-            <input type="text" class="form-control" id="Description" aria-describedby="emailHelp" style="height: 100px;">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" th:field="*{description}" id="description"></textarea>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Nombre de places disponible</label>
-            <input type="number" class="form-control" id="Number">
+            <label for="bed" class="form-label">Nombre de places disponible</label>
+            <input type="number" th:field="*{bed}" class="form-control" id="bed">
         </div>
-        <button type="submit" class="btn btn-primary">Valider</button>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
     </div>
 </form>
 

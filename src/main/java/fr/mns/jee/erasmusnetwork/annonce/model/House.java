@@ -5,5 +5,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record House(Integer id, String name, String bed, Integer bedAvailable, List<Bed> beds) {
+public record House(Integer id, String name, String description, String bed, Integer bedAvailable, List<Bed> beds) {
 }

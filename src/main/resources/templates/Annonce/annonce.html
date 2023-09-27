@@ -17,9 +17,11 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="mx-auto" style="width: 800px;">
+    <h1 class="text-center">Liste des collocations</h1>
+
+    <a href="collocation/add" class="btn btn-primary my-4">Ajouter une collocation</a>
 
     <table class="table table-hover caption-top">
-        <caption>Liste des collocations disponibles</caption>
         <thead>
         <tr>
             <th scope="col">Nom de la collocation</th>
@@ -35,8 +37,6 @@
         </tbody>
         </thead>
     </table>
-
-    <button class="btn btn-primary" style=""><a href="collocation/add" style="color: white; text-decoration: none;">Ajouter collocation</a></button>
 </div>
 
 <!-- Bootstrap JS -->
