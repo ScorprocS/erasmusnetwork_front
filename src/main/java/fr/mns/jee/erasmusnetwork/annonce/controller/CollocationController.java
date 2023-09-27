@@ -45,7 +45,6 @@ public class CollocationController {
     @GetMapping("/error")
     public ModelAndView error() {
         ModelAndView mv = new ModelAndView("Annonce/error");
-        mv.addObject("error", "Une erreur est survenue.");
         return mv;
     }
 
