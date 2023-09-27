@@ -9,16 +9,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
     private UserRestClient userRestClient;
 
-    public Optional<User> getUserByEmail(String email){
+    public User getUserByEmail(String email){
         return userRestClient.getUserByEmail(new GetUserByEmailRequest(email));
     }
 
@@ -51,6 +49,7 @@ public class UserService {
 //    }
     public User getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return getUsers().stream().filter(u -> u.getUsername() == authentication.getName()).findFirst().orElseThrow();
+        return getUserByEmail(authentication.getName());
+//        return getUsers().stream().filter(u -> u.getUsername() == authentication.getName()).findFirst().orElseThrow();
     }
 }
