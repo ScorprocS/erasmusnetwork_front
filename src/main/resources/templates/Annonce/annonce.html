@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -13,33 +15,28 @@
 
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
-<h1>Erasmus Network</h1>
 
-<div style="width: 570px; height: fit-content;">
+<div class="mx-auto" style="width: 800px;">
+    <h1 class="text-center">Liste des collocations</h1>
 
-    <table class="table table-hover caption-top" style="margin-left: 600px; text-align: center;">
-        <caption>Liste des collocations disponibles</caption>
+    <a href="collocation/add" class="btn btn-primary my-4">Ajouter une collocation</a>
+
+    <table class="table table-hover caption-top">
         <thead>
         <tr>
             <th scope="col">Nom de la collocation</th>
-            <th scope="col">Nbr de lit disponible</th>
+            <th scope="col">Nbr de lit total</th>
             <th scope="col">Nbr de lit restant</th>
         </tr>
         <tbody>
-            <tr>
-                <td><a href="collocation/12" class="pe-auto" style="color: black; text-decoration: none;">Les joyeux buveurs</a></td>
-                <td>5</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td><a href="collocation/14" class="pe-auto" style="color: black; text-decoration: none;">Les puants</a></td>
-                <td>2</td>
-                <td>2</td>
+        <tr th:each="house : ${houses}">
+                <td><a  th:href="'collocation/'+ ${house['id']}" class="pe-auto" style="color: black; text-decoration: none;" th:text="${house['name']}"/></td>
+                <td th:text="${house['bed']}"/>
+            <td th:text="${house['bedAvailable']}"/>
             </tr>
         </tbody>
         </thead>
     </table>
-
 </div>
 
 <!-- Bootstrap JS -->
