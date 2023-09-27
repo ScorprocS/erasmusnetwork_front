@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="users.css">-->
+    <title>Title</title>
+</head>
+<body>
+    <h1>
+        test
+    </h1>
+    <div>
+        <table>
+          <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>PassWord</th>
+                <th>Blocked</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr class="text-center" th:each="user : ${usersList}">
+              <td th:text="${user.id}"></td>
+              <td th:text="${user.email}"></td>
+              <td th:text="${user.password}"></td>
+              <td th:text="${user.blocked}"></td>
+          </tr>
+
+          </tbody>
+        </table>
+    </div>
+    <div th:if="${currentUser != null}">
+        <hr/>
+        Current user ID : <span th:text="${currentUser.id}"/>
+        <br/>
+        Current user email/username : <span th:text="${currentUser.email}"/>
+        <br/>
+        Current user password : <span th:text="${currentUser.password}"/> &lt;= pourquoi il est en clair ? j'en sais rien
+    </div>
+    <br><br><br><br><br><br><br><br>
+</body>
+</html>
