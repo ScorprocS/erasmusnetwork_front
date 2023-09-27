@@ -50,10 +50,16 @@ public class Group implements Serializable {
     }
 
     public Set<Message> getMessages() {
+        if(messages == null)
+            return Set.of();
+
         return messages.stream().sorted((m1, m2) -> m1.getCreatedAt().compareTo(m2.getCreatedAt())).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public Message getLastMessage() {
+        if(messages == null)
+            return null;
+
         return messages.stream().min((m1, m2) -> m2.getCreatedAt().compareTo(m1.getCreatedAt())).orElse(null);
     }
 

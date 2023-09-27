@@ -25,7 +25,7 @@
 	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item active">
-	        <a class="nav-link" th:href="@{/message}">Chats</a>
+	        <a class="nav-link" th:href="@{/chats}">Chats</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="#">Link</a>
@@ -58,21 +58,48 @@
 		<div class="w-100 bg-light flex align-items-start rounded-3 shadow-sm mt-4" style="min-height: 70vh;">
 			<div class="row align-items-start p-3" style="min-height: 70vh;">
 				<div class="col-3" >
-					<div class="bg-white rounded-3 shadow-sm p-3" style="min-height: 70vh; max-height: 70vh; overflow-y: auto;" id="message-container">
-						<a th:each="groupEl : ${groups}" th:href="@{'/message?group=' + ${groupEl.id}}" class="no-link-style">
-								<div th:class="${param.group != null && #lists.contains(param.group, groupEl.id.toString())} ? 'd-flex align-items-center bg-primary rounded p-3 text-white mb-3' : 'd-flex align-items-center p-3 mb-3'" style="height: 90px;">
-									<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
-									<div>
-										<div class="fw-bold" th:text="${groupEl.name}"></div>
-										<div class="text-muted" th:text="${groupEl.getLastMessage() != null ? groupEl.getLastMessage().getContent() : 'Aucun message'}"></div>
-									</div>
+					<form th:action="@{'/chats'}" method="post">
+						<div class="bg-white rounded-3 shadow-sm p-3" style="min-height: 70vh; max-height: 70vh; overflow-y: auto;" id="message-container">
+
+							<a th:if="${newChat == null}" th:each="group : ${groups}" th:href="@{'/chats?group=' + ${group.id}}" class="no-link-style">
+							<div th:class="${param.group != null && #lists.contains(param.group, group.id.toString())} ? 'd-flex align-items-center bg-primary rounded p-3 text-white mb-3' : 'd-flex align-items-center p-3 mb-3'" style="height: 90px;">
+								<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+								<div>
+									<div class="fw-bold" th:text="${group.name}"></div>
+									<div class="text-muted" th:text="${group.getLastMessage() != null ? group.getLastMessage().getContent() : 'Aucun message'}"></div>
 								</div>
+							</div>
+						</a>
+
+							<div th:else th:each="member : ${members}">
+								<div th:if="${member.id != 1}" style="height: 90px;">
+									<input type="checkbox" class="btn-check" name="members" th:id="${member.id + '-outlined'}" autocomplete="off" th:value="${member.id}">
+									<label class="btn btn-outline-primary shadow-none w-full d-flex align-items-center" th:for="${member.id + '-outlined'}">
+										<div class="rounded-circle bg-light me-3" style="height: 50px; width: 50px;"></div>
+										<div class="fw-bold" th:text="${member.customName}"></div>
+									</label>
+								</div>
+							</div>
+						</div>
+
+
+
+						<a th:if="${newChat == null}" th:href="@{'/chats?group=' + ${currentGroup != null ? currentGroup.id : ''} + '&new=true'}" class="btn btn-primary w-100 shadow-none border-none mt-3" style="height: 40px;">
+							<div th:if="${newChat == null}">New chat</div>
+						</a>
+
+						<input th:if="${newChat != null}" type="text" class="form-control shadow-none w-full mt-3" placeholder="Chat name" style="height: 40px;" name="groupName" />
+
+						<button type="submit" th:if="${newChat != null}" style="height: 40px; width: 200px;" class="btn btn-primary w-100 shadow-none border-none mt-3">
+							Validate
+						</button>
+					</form>
+
+					<div th:if="${newChat != null}" class="d-flex justify-content-center mt-3 w-100">
+						<a th:href="@{'/chats?group=' + ${currentGroup?.id}}" class="text-muted text-decoration-none" style="height: 40px;">
+							Cancel
 						</a>
 					</div>
-
-					<button class="btn btn-primary w-100 shadow-none border-none mt-3" style="height: 40px;">
-						Add group
-					</button>
 				</div>
 				<div class="col-9"  th:if="${currentGroup}">
 
@@ -86,7 +113,6 @@
 						<div class="p-3" style="min-height: 70vh; max-height: 70vh; overflow-y: auto;">
 							<div th:if ="${currentGroup.getMessages().isEmpty()}" class="text-center text-muted">Aucun message</div>
 							<div th:each="message : ${currentGroup.getMessages()}" class="mb-3">
-
 								<div th:if="${message.getSenderId().isPresent() && message.getSenderId().get() == CurrentMemberId}"
 									 class="d-flex align-items-end justify-content-end mb-3">
 									<div class="d-flex flex-column align-items-end">
@@ -123,7 +149,7 @@
 						</div>
 
 						<div class="sticky-bottom bg-white w-100 p-3 d-flex align-items-center">
-							<form th:action="@{'/message?group=' + ${currentGroup.id}}" method="post" class="d-flex align-items-center w-100">
+							<form th:action="@{'/chats?group=' + ${currentGroup.id}}" method="post" class="d-flex align-items-center w-100">
 								<input type="text" class="form-control shadow-none me-3" placeholder="Message..." style="width: 80%; height: 40px;" name="message" />
 								<button class="btn btn-primary shadow-none border-none" style="height: 40px; width: 200px;">
 									Send
