@@ -23,7 +23,6 @@ import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/collocation")
-//@PreAuthorize("isAuthenticated()")
 public class CollocationController {
 
     private final ApiService apiService;
