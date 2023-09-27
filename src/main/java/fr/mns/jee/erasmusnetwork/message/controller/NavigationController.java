@@ -48,7 +48,6 @@ public class NavigationController {
 
 		System.out.println("groupId: " + groupId + ", message: " + message);
 		if (groupId != null && message != null) {
-			System.out.println("groupId: " + groupId + ", message: " + message);
 			messageAPIService.createMessage(groupId, message, CurrentMemberId);
 		}
 		if (groupId != null) {
