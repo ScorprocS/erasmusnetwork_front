@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
 	<meta charset="UTF-8">
@@ -58,21 +59,21 @@
 			</form>
 			<div th:if="${userLikedComments != null && !userLikedComments.isEmpty()}">
 				<table class="table table-striped">
-				<tr>
-					<th scope="col">Commentaire liké</th>
-					<th scope="col">User qui a liké</th>
-					<th scope="col">Type de like</th>
-				</tr>
-				<tr th:each="comment: ${userLikedComments}">
-					<td th:utext="${comment.commentId}"></td>
-					<td th:utext="${comment.userId}"></td>
-					<td th:utext="${comment.like}"></td>
-				</tr>
+					<tr>
+						<th scope="col">Commentaire liké</th>
+						<th scope="col">User qui a liké</th>
+						<th scope="col">Type de like</th>
+					</tr>
+					<tr th:each="comment: ${userLikedComments}">
+						<td th:utext="${comment.commentId}"></td>
+						<td th:utext="${comment.userId}"></td>
+						<td th:utext="${comment.like}"></td>
+					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-	
+
 	<div th:if="${posts != null && !posts.isEmpty()}">
 		<div class="container mt-12">
 			<h1>Liste des posts likés</h1>
@@ -98,21 +99,21 @@
 			</form>
 			<div th:if="${userLikedPosts != null && !userLikedPosts.isEmpty()}">
 				<table class="table table-striped">
-				<tr>
-					<th scope="col">Post liké</th>
-					<th scope="col">User qui a liké</th>
-					<th scope="col">Type de like</th>
-				</tr>
-				<tr th:each="post: ${userLikedPosts}">
-					<td th:utext="${post.postId}"></td>
-					<td th:utext="${post.userId}"></td>
-					<td th:utext="${post.like}"></td>
-				</tr>
+					<tr>
+						<th scope="col">Post liké</th>
+						<th scope="col">User qui a liké</th>
+						<th scope="col">Type de like</th>
+					</tr>
+					<tr th:each="post: ${userLikedPosts}">
+						<td th:utext="${post.postId}"></td>
+						<td th:utext="${post.userId}"></td>
+						<td th:utext="${post.like}"></td>
+					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-	
+
 	<div th:if="${users != null && !users.isEmpty()}">
 		<div class="container mt-12">
 			<h1>Liste des users likés</h1>
@@ -138,16 +139,16 @@
 			</form>
 			<div th:if="${userLikedUsers != null && !userLikedUsers.isEmpty()}">
 				<table class="table table-striped">
-				<tr>
-					<th scope="col">User liké</th>
-					<th scope="col">User qui a liké</th>
-					<th scope="col">Type de like</th>
-				</tr>
-				<tr th:each="user: ${userLikedUsers}">
-					<td th:utext="${user.likedUserId}"></td>
-					<td th:utext="${user.userId}"></td>
-					<td th:utext="${user.like}"></td>
-				</tr>
+					<tr>
+						<th scope="col">User liké</th>
+						<th scope="col">User qui a liké</th>
+						<th scope="col">Type de like</th>
+					</tr>
+					<tr th:each="user: ${userLikedUsers}">
+						<td th:utext="${user.likedUserId}"></td>
+						<td th:utext="${user.userId}"></td>
+						<td th:utext="${user.like}"></td>
+					</tr>
 				</table>
 			</div>
 		</div>
