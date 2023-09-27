@@ -36,7 +36,7 @@
 
 	<div th:if="${comments != null && !comments.isEmpty()}">
 		<div class="container mt-12">
-			<h1>Liste des commentaires likés</h1>
+			<h1>Liste des commentaires likés : <span th:text="${comments.size()}"></span> éléments</h1>
 			<table class="table table-striped">
 				<tr>
 					<th scope="col">Commentaire liké</thscope="col">
@@ -76,7 +76,7 @@
 
 	<div th:if="${posts != null && !posts.isEmpty()}">
 		<div class="container mt-12">
-			<h1>Liste des posts likés</h1>
+			<h1>Liste des posts likés : <span th:text="${posts.size()}"></span> éléments</h1>
 			<table class="table table-striped">
 				<tr>
 					<th scope="col">Post liké</thscope="col">
@@ -116,7 +116,7 @@
 
 	<div th:if="${users != null && !users.isEmpty()}">
 		<div class="container mt-12">
-			<h1>Liste des users likés</h1>
+			<h1>Liste des users likés : <span th:text="${users.size()}"></span> éléments</h1>
 			<table class="table table-striped">
 				<tr>
 					<th scope="col">User liké</thscope="col">
