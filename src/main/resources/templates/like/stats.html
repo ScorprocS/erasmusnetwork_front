@@ -1,0 +1,234 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<title>Statistiques</title>
+</head>
+
+<body>
+	<div th:replace="fragments/navbar :: navbar"></div>
+
+	<div class="container mt-3 mb-3">
+		<div class="row">
+			<div class="col-sm-12">
+				<a th:href="@{/stats/comment}" class="btn btn-primary btn-md">Commentaires</a>
+				<a th:href="@{/stats/post}" class="btn btn-primary btn-md">Posts</a>
+				<a th:href="@{/stats/user}" class="btn btn-primary btn-md">Users</a>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${comments != null && !comments.isEmpty()}">
+		<div class="container mt-12">
+			<h1>Liste des commentaires likés : <span th:text="${comments.size()}"></span> éléments</h1>
+			<table class="table table-striped">
+				<tr>
+					<th scope="col">Commentaire liké</thscope="col">
+					<th scope="col">User qui a liké</th>
+					<th scope="col">Type de like</th>
+					<th></th>
+				</tr>
+				<tr th:each="comment: ${comments}">
+					<td th:utext="${comment.commentId}"></td>
+					<td th:utext="${comment.userId}"></td>
+					<td th:utext="${comment.like}"></td>
+					<td th:if="${comment.like.toString() == 'WOAW'}">
+						<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;" />
+					</td>
+					<td th:if="${comment.like.toString() == 'LIKE'}">
+						<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;" />
+					</td>
+					<td th:if="${comment.like.toString() =='LOVE'}">
+						<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;" />
+					</td>
+					<td th:if="${comment.like.toString() == 'BRAVO'}">
+						<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;" />
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="container">
+			<h2>Liste des commentaires likés par utilisateur</h2>
+			<form th:action="@{/stats/commentByUser}">
+				<input name="userId" type="number" th:value="${userId}">
+				<button type="submit">Rechercher</button>
+			</form>
+			<div th:if="${userLikedComments != null && !userLikedComments.isEmpty()}">
+				<table class="table table-striped">
+					<tr>
+						<th scope="col">Commentaire liké</th>
+						<th scope="col">User qui a liké</th>
+						<th scope="col">Type de like</th>
+						<th></th>
+					</tr>
+					<tr th:each="comment: ${userLikedComments}">
+						<td th:utext="${comment.commentId}"></td>
+						<td th:utext="${comment.userId}"></td>
+						<td th:utext="${comment.like}"></td>
+						<td th:if="${comment.like.toString() == 'WOAW'}">
+							<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;" />
+						</td>
+						<td th:if="${comment.like.toString() == 'LIKE'}">
+							<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;" />
+						</td>
+						<td th:if="${comment.like.toString() =='LOVE'}">
+							<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;" />
+						</td>
+						<td th:if="${comment.like.toString() == 'BRAVO'}">
+							<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${posts != null && !posts.isEmpty()}">
+		<div class="container mt-12">
+			<h1>Liste des posts likés : <span th:text="${posts.size()}"></span> éléments</h1>
+			<table class="table table-striped">
+				<tr>
+					<th scope="col">Post liké</thscope="col">
+					<th scope="col">User qui a liké</th>
+					<th scope="col">Type de like</th>
+					<th></th>
+				</tr>
+				<tr th:each="post: ${posts}">
+					<td th:utext="${post.postId}"></td>
+					<td th:utext="${post.userId}"></td>
+					<td th:utext="${post.like}"></td>
+					<td th:if="${post.like.toString() == 'WOAW'}">
+						<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;" />
+					</td>
+					<td th:if="${post.like.toString() == 'LIKE'}">
+						<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;" />
+					</td>
+					<td th:if="${post.like.toString() =='LOVE'}">
+						<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;" />
+					</td>
+					<td th:if="${post.like.toString() == 'BRAVO'}">
+						<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;" />
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="container">
+			<h2>Liste des posts likés par utilisateur</h2>
+			<form th:action="@{/stats/postByUser}">
+				<input name="userId" type="number" th:value="${userId}">
+				<button type="submit">Rechercher</button>
+			</form>
+			<div th:if="${userLikedPosts != null && !userLikedPosts.isEmpty()}">
+				<table class="table table-striped">
+					<tr>
+						<th scope="col">Post liké</th>
+						<th scope="col">User qui a liké</th>
+						<th scope="col">Type de like</th>
+						<th></th>
+					</tr>
+					<tr th:each="post: ${userLikedPosts}">
+						<td th:utext="${post.postId}"></td>
+						<td th:utext="${post.userId}"></td>
+						<td th:utext="${post.like}"></td>
+						<td th:if="${post.like.toString() == 'WOAW'}">
+							<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;" />
+						</td>
+						<td th:if="${post.like.toString() == 'LIKE'}">
+							<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;" />
+						</td>
+						<td th:if="${post.like.toString() =='LOVE'}">
+							<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;" />
+						</td>
+						<td th:if="${post.like.toString() == 'BRAVO'}">
+							<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${users != null && !users.isEmpty()}">
+		<div class="container mt-12">
+			<h1>Liste des users likés : <span th:text="${users.size()}"></span> éléments</h1>
+			<table class="table table-striped">
+				<tr>
+					<th scope="col">User liké</thscope="col">
+					<th scope="col">User qui a liké</th>
+					<th scope="col">Type de like</th>
+					<th></th>
+				</tr>
+				<tr th:each="user: ${users}">
+					<td th:utext="${user.likedUserId}"></td>
+					<td th:utext="${user.userId}"></td>
+					<td th:utext="${user.like}"></td>
+					<td th:if="${user.like.toString() == 'WOAW'}">
+						<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;" />
+					</td>
+					<td th:if="${user.like.toString() == 'LIKE'}">
+						<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;" />
+					</td>
+					<td th:if="${user.like.toString() =='LOVE'}">
+						<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;" />
+					</td>
+					<td th:if="${user.like.toString() == 'BRAVO'}">
+						<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;" />
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="container">
+			<h2>Liste des Users likés par utilisateur</h2>
+			<form th:action="@{/stats/userByUser}">
+				<input name="userId" type="number" th:value="${userId}">
+				<button type="submit">Rechercher</button>
+			</form>
+			<div th:if="${userLikedUsers != null && !userLikedUsers.isEmpty()}">
+				<table class="table table-striped">
+					<tr>
+						<th scope="col">User liké</th>
+						<th scope="col">User qui a liké</th>
+						<th scope="col">Type de like</th>
+						<th></th>
+					</tr>
+					<tr th:each="user: ${userLikedUsers}">
+						<td th:utext="${user.likedUserId}"></td>
+						<td th:utext="${user.userId}"></td>
+						<td th:utext="${user.like}"></td>
+						<td th:if="${user.like.toString() == 'WOAW'}">
+							<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;" />
+						</td>
+						<td th:if="${user.like.toString() == 'LIKE'}">
+							<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;" />
+						</td>
+						<td th:if="${user.like.toString() =='LOVE'}">
+							<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;" />
+						</td>
+						<td th:if="${user.like.toString() == 'BRAVO'}">
+							<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="container mt-3"
+		th:if="${(comments == null || comments?.isEmpty()) && (posts == null || posts?.isEmpty()) && (users == null || users?.isEmpty()) }">
+		Aucun élément trouvé</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
