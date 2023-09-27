@@ -42,11 +42,24 @@
 					<th scope="col">Commentaire liké</thscope="col">
 					<th scope="col">User qui a liké</th>
 					<th scope="col">Type de like</th>
+					<th></th>
 				</tr>
 				<tr th:each="comment: ${comments}">
 					<td th:utext="${comment.commentId}"></td>
 					<td th:utext="${comment.userId}"></td>
 					<td th:utext="${comment.like}"></td>
+					<td th:if="${comment.like.toString() == 'WOAW'}">
+						<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;"/>
+					</td>
+					<td th:if="${comment.like.toString() == 'LIKE'}">
+						<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;"/>
+					</td>
+					<td th:if="${comment.like.toString() =='LOVE'}">
+						<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;"/>
+					</td>
+					<td th:if="${comment.like.toString() == 'BRAVO'}">
+						<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;"/>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -63,11 +76,24 @@
 						<th scope="col">Commentaire liké</th>
 						<th scope="col">User qui a liké</th>
 						<th scope="col">Type de like</th>
+						<th></th>
 					</tr>
 					<tr th:each="comment: ${userLikedComments}">
 						<td th:utext="${comment.commentId}"></td>
 						<td th:utext="${comment.userId}"></td>
 						<td th:utext="${comment.like}"></td>
+						<td th:if="${comment.like.toString() == 'WOAW'}">
+							<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;"/>
+						</td>
+						<td th:if="${comment.like.toString() == 'LIKE'}">
+							<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;"/>
+						</td>
+						<td th:if="${comment.like.toString() =='LOVE'}">
+							<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;"/>
+						</td>
+						<td th:if="${comment.like.toString() == 'BRAVO'}">
+							<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;"/>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -82,11 +108,24 @@
 					<th scope="col">Post liké</thscope="col">
 					<th scope="col">User qui a liké</th>
 					<th scope="col">Type de like</th>
+					<th></th>
 				</tr>
 				<tr th:each="post: ${posts}">
 					<td th:utext="${post.postId}"></td>
 					<td th:utext="${post.userId}"></td>
 					<td th:utext="${post.like}"></td>
+					<td th:if="${post.like.toString() == 'WOAW'}">
+						<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;"/>
+					</td>
+					<td th:if="${post.like.toString() == 'LIKE'}">
+						<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;"/>
+					</td>
+					<td th:if="${post.like.toString() =='LOVE'}">
+						<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;"/>
+					</td>
+					<td th:if="${post.like.toString() == 'BRAVO'}">
+						<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;"/>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -103,11 +142,24 @@
 						<th scope="col">Post liké</th>
 						<th scope="col">User qui a liké</th>
 						<th scope="col">Type de like</th>
+						<th></th>
 					</tr>
 					<tr th:each="post: ${userLikedPosts}">
 						<td th:utext="${post.postId}"></td>
 						<td th:utext="${post.userId}"></td>
 						<td th:utext="${post.like}"></td>
+						<td th:if="${post.like.toString() == 'WOAW'}">
+							<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;"/>
+						</td>
+						<td th:if="${post.like.toString() == 'LIKE'}">
+							<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;"/>
+						</td>
+						<td th:if="${post.like.toString() =='LOVE'}">
+							<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;"/>
+						</td>
+						<td th:if="${post.like.toString() == 'BRAVO'}">
+							<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;"/>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -122,11 +174,24 @@
 					<th scope="col">User liké</thscope="col">
 					<th scope="col">User qui a liké</th>
 					<th scope="col">Type de like</th>
+					<th></th>
 				</tr>
 				<tr th:each="user: ${users}">
 					<td th:utext="${user.likedUserId}"></td>
 					<td th:utext="${user.userId}"></td>
 					<td th:utext="${user.like}"></td>
+					<td th:if="${user.like.toString() == 'WOAW'}">
+						<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;"/>
+					</td>
+					<td th:if="${user.like.toString() == 'LIKE'}">
+						<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;"/>
+					</td>
+					<td th:if="${user.like.toString() =='LOVE'}">
+						<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;"/>
+					</td>
+					<td th:if="${user.like.toString() == 'BRAVO'}">
+						<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;"/>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -143,11 +208,24 @@
 						<th scope="col">User liké</th>
 						<th scope="col">User qui a liké</th>
 						<th scope="col">Type de like</th>
+						<th></th>
 					</tr>
 					<tr th:each="user: ${userLikedUsers}">
 						<td th:utext="${user.likedUserId}"></td>
 						<td th:utext="${user.userId}"></td>
 						<td th:utext="${user.like}"></td>
+						<td th:if="${user.like.toString() == 'WOAW'}">
+							<img th:src="@{/images/WAOW.jpg}" alt="WOAW" style="width: 20px; height: 20px;"/>
+						</td>
+						<td th:if="${user.like.toString() == 'LIKE'}">
+							<img th:src="@{/images/LIKE.png}" alt="LIKE" style="width: 20px; height: 20px;"/>
+						</td>
+						<td th:if="${user.like.toString() =='LOVE'}">
+							<img th:src="@{/images/LOVE.png}" alt="LOVE" style="width: 20px; height: 20px;"/>
+						</td>
+						<td th:if="${user.like.toString() == 'BRAVO'}">
+							<img th:src="@{/images/BRAVO.png}" alt="BRAVO" style="width: 20px; height: 20px;"/>
+						</td>
 					</tr>
 				</table>
 			</div>
